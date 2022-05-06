@@ -6,7 +6,7 @@
  *
  * Description: Standard Types for our MicroWave Project
  * 
- * Authors: Mostafa Mahmoud Ali & Mai 
+ * Authors: Mostafa Mahmoud Ali & Mai Esmail Gamal
  *
  *******************************************************************************/
 
