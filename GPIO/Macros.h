@@ -6,7 +6,7 @@
  *
  * Description: Commonly Used Macros
  *
- * Author: Hussam Eldin Wael
+ * Author: Mostafa Mahmoud Ali 
  *
  *******************************************************************************/
 
