@@ -1,7 +1,8 @@
 # Embedded-Project
 Microwave Oven Controller Project
 
-## Aim: This project simulates the embedded controller in a microwave oven.
+## Aim:
+This project simulates the embedded controller in a microwave oven.
 
 ## Requirements:
 
