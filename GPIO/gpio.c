@@ -220,13 +220,44 @@ void GPIO_unlockPin(uint8_t portNum , uint8_t pinNum){
  */
 void GPIO_enableInternalResistance(uint8_t portNum , uint8_t pinNum , GPIO_PinInternalResistance res){
 
-	if((pinNum >= NUM_OF_PINS_PER_PORT) || (portNum >= NUM_OF_PORTS))
-	{
+	volatile uint32_t * PullUp_Registers[] = {&GPIO_PORTA_PUR_R ,
+				&GPIO_PORTB_PUR_R ,
+				&GPIO_PORTC_PUR_R,
+				&GPIO_PORTD_PUR_R,
+				&GPIO_PORTE_PUR_R,
+				&GPIO_PORTF_PUR_R};
+
+	volatile uint32_t * PullDown_Registers[] = {&GPIO_PORTA_PDR_R,
+				&GPIO_PORTB_PDR_R,
+				&GPIO_PORTC_PDR_R,
+				&GPIO_PORTD_PDR_R,
+				&GPIO_PORTE_PDR_R,
+				&GPIO_PORTF_PDR_R};
+
+	if((pinNum >= NUM_OF_PINS_PER_PORT) || (portNum >= NUM_OF_PORTS)){
 		/* Do Nothing */
 	}
 
 	else{
-		/*Write your code here ...*/
+
+		switch(res){
+
+			case NONE:{
+				/*Do Nothing*/
+				break;
+			}
+
+			case PULL_UP:{
+				SET_BIT(*PullUp_Registers[portNum], pinNum);
+				break;
+			}
+
+			case PULL_DOWN:{
+				SET_BIT(*PullDown_Registers[portNum],pinNum);
+				break;
+			}
+
+		}		/*Write your code here ...*/
 	}
 }
 
