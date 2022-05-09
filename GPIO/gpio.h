@@ -6,14 +6,15 @@
  *
  * Description: Header file for The TivaC GPIO Driver.
  *
- * Author: Hussam Eldin Wael
+ * Author: Mostafa Mahmoud Ali
+ *         Mai Esmail Gamal
  *
  *******************************************************************************/
 
 #ifndef GPIO_H_
 #define GPIO_H_
 
-#include "stdint.h"
+#include "std_types.h"
 #include "altFunc.h"
 
 /*******************************************************************************
