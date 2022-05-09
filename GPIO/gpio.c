@@ -131,31 +131,37 @@ void GPIO_configurePortClock(uint8_t portNum)
 		case PORTA_ID:
 			SYSCTL_RCGCGPIO_R |= PORT_ClockControl[0];
 			while ((SYSCTL_PRGPIO_R & PORT_ClockControl[0]) == 0);
+
 			break;
 
 		case PORTB_ID:
 			SYSCTL_RCGCGPIO_R |= PORT_ClockControl[1];
 			while ((SYSCTL_PRGPIO_R & PORT_ClockControl[1]) == 0);
+
 			break;
 
 		case PORTC_ID:
 			SYSCTL_RCGCGPIO_R |= PORT_ClockControl[2];
 			while ((SYSCTL_PRGPIO_R & PORT_ClockControl[2]) == 0);
+
 			break;
 
 		case PORTD_ID:
 			SYSCTL_RCGCGPIO_R |= PORT_ClockControl[3];
 			while ((SYSCTL_PRGPIO_R & PORT_ClockControl[3]) == 0);
+
 			break;
 
 		case PORTE_ID:
 			SYSCTL_RCGCGPIO_R |= PORT_ClockControl[4];
 			while ((SYSCTL_PRGPIO_R & PORT_ClockControl[4]) == 0);
+
 			break;
 
 		case PORTF_ID:
 			SYSCTL_RCGCGPIO_R |= PORT_ClockControl[5];
 			while ((SYSCTL_PRGPIO_R & PORT_ClockControl[5]) == 0);
+
 			break;
 
 		default:
@@ -268,7 +274,11 @@ void GPIO_enableInternalResistance(uint8_t portNum, uint8_t pinNum, GPIO_PinInte
 			break;
 		}
 
+		}
+
+
 		} 
+
 	}
 }
 
@@ -324,7 +334,46 @@ void GPIO_setAlternateFunction(uint8_t portNum, uint8_t pinNum, uint8_t altFunc)
 
 	else
 	{
-		
+
+
+		volatile uint32_t value = altFunc << (4 * pinNum);
+
+		switch (portNum)
+		{
+		case PORTA_ID:
+			GPIO_PORTA_PCTL_R &= ~value;
+			GPIO_PORTA_PCTL_R |= value;
+			break;
+
+		case PORTB_ID:
+			GPIO_PORTB_PCTL_R &= ~value;
+			GPIO_PORTB_PCTL_R |= value;
+			break;
+
+		case PORTC_ID:
+			GPIO_PORTC_PCTL_R &= ~value;
+			GPIO_PORTC_PCTL_R |= value;
+			break;
+
+		case PORTD_ID:
+			GPIO_PORTD_PCTL_R &= ~value;
+			GPIO_PORTD_PCTL_R |= value;
+			break;
+
+		case PORTE_ID:
+			GPIO_PORTE_PCTL_R &= ~value;
+			GPIO_PORTE_PCTL_R |= value;
+			break;
+
+		case PORTF_ID:
+			GPIO_PORTF_PCTL_R &= ~value;
+			GPIO_PORTF_PCTL_R |= value;
+			break;
+
+		default:
+			break;
+		}
+
 	}
 }
 

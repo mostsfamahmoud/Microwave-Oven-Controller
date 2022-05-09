@@ -8,7 +8,7 @@
  *
  * Author: Mostafa Mahmoud Ali
  *         Mai Esmail Gamal
- *
+ 
  *******************************************************************************/
 
 #ifndef GPIO_H_
