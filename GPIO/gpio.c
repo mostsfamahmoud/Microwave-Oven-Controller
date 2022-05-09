@@ -257,7 +257,7 @@ void GPIO_enableInternalResistance(uint8_t portNum , uint8_t pinNum , GPIO_PinIn
 				break;
 			}
 
-		}		/*Write your code here ...*/
+		}		
 	}
 }
 
