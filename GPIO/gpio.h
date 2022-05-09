@@ -6,8 +6,13 @@
  *
  * Description: Header file for The TivaC GPIO Driver.
  *
+<<<<<<< HEAD
  * Author: Mostafa Mahmoud Ali
  *         Mai Esmail Gamal
+=======
+ * Author: Mostafa Mahmoud Ali 
+ *         Mai Esmail Gamal 
+>>>>>>> ab7c80830ec8fd758409a262558d9021195e8ab6
  *
  *******************************************************************************/
 
