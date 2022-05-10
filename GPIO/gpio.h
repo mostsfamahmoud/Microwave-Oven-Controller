@@ -248,6 +248,21 @@ uint8_t GPIO_readPort(uint8_t portNum);
  */
 void GPIO_init(GPIO_ConfigurationType *config_ptr);
 
+/*
+ * Description :
+ * Initialization the required Port.
+ * Register(s) : RCGC2, GPIO_LOCK, GPIO_CR, GPIO_DEN, GPIO_AMSEL, GPIO_AFSEL, GPIO_PCTL.
+ * If the input port number or pin number are not correct, The function will not handle the request.
+ */
+void PORT_INIT(uint8_t portnum);
+
+/*
+ * Description :
+ * Setup the direction of the required Port.
+ * Register(s) : GPIO_DIR.
+ * If the input port number or pin number are not correct, The function will not handle the request.
+ */
+void GPIO_setPortDirection(uint8_t portnum, uint8_t direction);
 
 #endif /* GPIO_H_ */
 

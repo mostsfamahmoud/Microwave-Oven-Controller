@@ -569,3 +569,102 @@ uint8_t GPIO_readPort(uint8_t portNum)
 
 	return *DATA_Registers[portNum] & 0xFF;
 }
+/*
+ * Description :
+ * Initialization the required Port.
+ * Register(s) : RCGC2, GPIO_LOCK, GPIO_CR, GPIO_DEN, GPIO_AMSEL, GPIO_AFSEL, GPIO_PCTL.
+ * If the input port number or pin number are not correct, The function will not handle the request.
+ */
+void PORT_INIT(uint8_t portnum)
+{
+    if (portNum >= NUM_OF_PORTS)
+    {
+        /* Do Nothing */
+    }
+    else
+    {
+        switch (portnum)
+        {
+        case PORTA_ID:
+            SET_BIT(SYSCTL_RCGCGPIO_R, PIN0_ID);
+            while (BIT_IS_SET(SYSCTL_PRGPIO_R, PIN0_ID) == 0);
+            GPIO_PORTA_DEN_R = 0xFF;
+            GPIO_PORTA_AMSEL_R = 0x00;
+            GPIO_PORTF_AFSEL_R = 0x00;
+            GPIO_PORTA_PCTL_R = 0x00000000;
+            break;
+        case PORTB_ID:
+            SET_BIT(SYSCTL_RCGCGPIO_R, PIN1_ID);
+            while (BIT_IS_SET(SYSCTL_PRGPIO_R, PIN1_ID) == 0);
+            GPIO_PORTB_DEN_R = 0xFF;
+            GPIO_PORTB_AMSEL_R = 0X00;
+            GPIO_PORTF_AFSEL_R = 0x00;
+            GPIO_PORTB_PCTL_R = 0x00000000;
+            break;
+        case PORTD_ID:
+            SET_BIT(SYSCTL_RCGCGPIO_R, PIN3_ID);
+            while (BIT_IS_SET(SYSCTL_PRGPIO_R, PIN3_ID) == 0);
+            REG_UNLOCK(GPIO_PORTD_LOCK_R);
+            GPIO_PORTD_CR_R = 0xFF;
+            GPIO_PORTD_DEN_R = 0xFF;
+            GPIO_PORTD_AMSEL_R = 0x00;
+            GPIO_PORTF_AFSEL_R = 0x00;
+            GPIO_PORTD_PCTL_R = 0x00000000;
+            break;
+        case PORTE_ID:
+            SET_BIT(SYSCTL_RCGCGPIO_R, PIN4_ID);
+            while (BIT_IS_SET(SYSCTL_PRGPIO_R, PIN4_ID) == 0);
+            GPIO_PORTE_DEN_R = 0x2F;
+            GPIO_PORTE_AMSEL_R = 0x00;
+            GPIO_PORTF_AFSEL_R = 0x00;
+            GPIO_PORTE_PCTL_R = 0x00000000;
+            break;
+        case PORTF_ID:
+            SET_BIT(SYSCTL_RCGCGPIO_R, PIN5_ID);
+            while (BIT_IS_SET(SYSCTL_PRGPIO_R, PIN5_ID) == 0);
+            REG_UNLOCK(GPIO_PORTF_LOCK_R);
+            GPIO_PORTF_CR_R = 0x1F;
+            GPIO_PORTF_DEN_R = 0x1F;
+            GPIO_PORTF_AMSEL_R = 0x00;
+            GPIO_PORTF_AFSEL_R = 0x00;
+            GPIO_PORTF_PCTL_R = 0x00000000;
+            break;
+        }
+    }
+}
+
+/*
+ * Description :
+ * Setup the direction of the required Port.
+ * Register(s) : GPIO_DIR.
+ * If the input port number or pin number are not correct, The function will not handle the request.
+ */
+void GPIO_setPortDirection(uint8_t portnum, uint8_t direction)
+{
+    if (portNum >= NUM_OF_PORTS)
+    {
+        /* Do Nothing */
+    }
+    else
+    {
+        switch (portnum)
+        {
+        case PORTA_ID:
+            GPIO_PORTA_DIR_R = direction;
+            break;
+        case PORTB_ID:
+            GPIO_PORTB_DIR_R = direction;
+            break;
+        case PORTD_ID:
+            GPIO_PORTD_DIR_R = direction;
+            break;
+        case PORTE_ID:
+            GPIO_PORTE_DIR_R = direction;
+            break;
+        case PORTF_ID:
+            GPIO_PORTF_DIR_R = direction;
+            break;
+        }
+    }
+}
+
