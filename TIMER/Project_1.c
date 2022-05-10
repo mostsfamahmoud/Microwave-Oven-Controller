@@ -1,5 +1,4 @@
 #include "systic.h"
-#include "Io.h"
 //Systick setup
 void systic_wait(unsigned long delay){
     NVIC_ST_CTRL_R = 0x00;
