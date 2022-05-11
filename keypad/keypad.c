@@ -6,7 +6,7 @@
  *
  * Description: Source file for THE KEYPAD Driver.
  * 
- * Authors: Huda Abbdelnasser Taalap Haridy 
+ * Authors: Huda Abdelnasser Taalap Haridy 
  *          Abdelrahman Ali Mohamed Ali
  ***************************/
 #include "gpio.h"
