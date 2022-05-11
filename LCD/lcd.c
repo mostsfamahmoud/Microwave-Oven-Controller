@@ -53,4 +53,67 @@ void LCD_COMMAND(char command){
     sendPulse();
     Generic_delay_m_sec(1);
 }
+/*
+ * Description :
+ * Sending The pulse.
+ * Register(s) : CTRL_PORT.
+ */
 
+static void sendPulse(void){
+    GPIO_writePin(CTRL_PORT,Enable,1);
+    Generic_delay_m_sec(2);
+    GPIO_writePin(CTRL_PORT,Enable,0);
+    Generic_delay_m_sec(2);
+}
+
+/*
+ * Description :
+ * Sending Char.
+ * Register(s) : CTRL_PORT,DATA_PORT.
+ */
+
+void send_Char(char char){
+    GPIO_writePin(DATA_PORT,char);
+    GPIO_writePin(CTRL_PORT,RS,1);
+    sendPulse();
+    Generic_delay_m_sec(1);
+}
+/*
+ * Description :
+ * Sending String.
+ * Register(s) : CTRL_PORT,DATA_PORT.
+ */
+void send_String(char *data){
+    while((*data)!='0'){
+        send_Char((*data));
+        data++;
+    }
+}
+/*
+ * Description :
+ * Clear Screen.
+ * Register(s) : Clear_Screen.
+ */
+
+void LCD_Clear_Screen(){
+    LCD_COMMAND(Clear_Screen);
+    Generic_delay_m_sec(10);
+}
+/*
+ * Description :
+ * Move Curser.
+ * Register(s) : C_FIRST_LINE,C_SEC_LINE.
+ */
+
+void LCD_Move_Curser(char row,char col){
+    char position =0;
+    if(row=0){
+        position = (C_FIRST_LINE)+col-1;
+    }else if(row =2){
+        position = (C_SEC_LINE)+col-1;
+    }else{
+        position = C_FIRST_LINE;
+    }
+    LCD_COMMAND(position);
+    Generic_delay_m_sec(1);
+}
