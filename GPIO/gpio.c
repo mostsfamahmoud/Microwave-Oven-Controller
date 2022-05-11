@@ -571,7 +571,7 @@ uint8_t GPIO_readPort(uint8_t portNum)
 }
 /*
  * Description :
- * Initialization the required Port.
+ * Initialization the required Port as Digital I/O.
  * Register(s) : RCGC2, GPIO_LOCK, GPIO_CR, GPIO_DEN, GPIO_AMSEL, GPIO_AFSEL, GPIO_PCTL.
  * If the input port number or pin number are not correct, The function will not handle the request.
  */
