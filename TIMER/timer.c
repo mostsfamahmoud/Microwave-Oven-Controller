@@ -46,7 +46,7 @@ uint32_t i;
  * Description : 
  * delay for one second
  */
-void Generic_delay_sec(uuint32_t sec){
+void Generic_delay_sec(uint32_t sec){
 uint32_t i;
 	for(i=0; i< sec; i++)
 	{
