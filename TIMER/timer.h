@@ -44,6 +44,16 @@ void systic_wait(uint32_t delay)
 
 void Generic_delay_m_sec(uint32_t m_sec);
 
+/*
+ * Description : 
+ * delay for one second
+ */
 void Generic_delay_sec(uint32_t sec);
 
+/*
+ * Description : 
+ * delay for one minute
+ */
 void Generic_delay_min(uint32_t mins);
+
+#endif //TIMER_H_
