@@ -35,7 +35,7 @@
  * Register(s) : NVIC_ST_CTRL_R , NVIC_ST_RELOAD_R ,NVIC_ST_CURRENT_R
  */
 
-void systic_wait(uint32_t delay)
+void systic_wait(uint32_t delay);
 
 /*
  * Description : 
