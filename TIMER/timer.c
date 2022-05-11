@@ -10,7 +10,6 @@
  *          Esraa Amr Abdelmoneam Hassan Kandil
  ***************************/
 #include "timer.h"
-#include "std_types.h"
 /***************************
  *                       Functions Definitions                             *
  ***************************/
