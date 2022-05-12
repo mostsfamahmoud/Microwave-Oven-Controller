@@ -11,6 +11,9 @@
 			Huda Abdelnasser Taalap Haridy
  *
  ***************************/
+
+#include "std_types.h"
+
 /*
  * Description :
  * initalization the Buzzer Pin.
