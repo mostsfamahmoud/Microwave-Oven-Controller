@@ -13,6 +13,21 @@
  ***************************/
 /*
  * Description :
+ * initalization the Buzzer Pin.
+ * 
+ */
+
+void Buzzer_init(uint8_t portNum , uint8_t pinNum);
+
+	/*
+ * Description :
+ * calling the Buzzer Pin.
+ * 
+ */
+	
+void Buzzer_call();
+/*
+ * Description :
  * initalization the Button Pin.
  * 
  */
