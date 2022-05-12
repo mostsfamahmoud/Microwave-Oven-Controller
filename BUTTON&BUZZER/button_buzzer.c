@@ -7,7 +7,7 @@
  * Description: Button and Buzzer c file
  *
  * Authors: Abdelrahman Ali Mohamed Ali
-			Huda Abbdelnasser Taalap Haridy
+	    Huda Abdelnasser Taalap Haridy
  *
  *******************************************************************************/
 
@@ -32,5 +32,24 @@ void Buzzer_init(uint8_t portNum , uint8_t pinNum){
 	
 void Buzzer_call(){
 	GPIO_writePin( portNum , pinNum , 1 );
+}
+
+/*
+ * Description :
+ * initalization the Button Pin.
+ * 
+ */
+void BUTTON_INIT(uint8_t portNum, uint8_t pinNum)
+{
+    GPIO_ConfigurationType button = {portNum, pinNum, DIGITAL, NORMAL_MODE, GPIO_PORT_MODE, PIN_INPUT, PULL_UP};
+}
+/*
+ * Description :
+ * Function that reads the Button.
+ * 
+ */
+uint8_t BUTTON_READ (uint8_t portNum, uint8_t pinNum)
+{
+   return GPIO_readPin(portNum, pinNum);
 }
 
