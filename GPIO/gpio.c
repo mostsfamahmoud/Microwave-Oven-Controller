@@ -305,3 +305,184 @@ uint8_t GPIO_readPin(uint8_t PortNum, uint8_t PinNum)
     }
 		return 0;
 }
+/*
+ * Description :
+ * Write the value Logic High or Logic Low on the required pin.
+ * Register(s) : GPIODATA
+ * If the input port number or pin number are not correct, The function will not handle the request.
+ */
+
+void GPIO_writePin(uint8_t PortNum, uint8_t PinNum, uint8_t Data)
+{
+
+    if ((PinNum >= NUM_OF_PINS_PER_PORT) || (PortNum >= NUM_OF_PORTS))
+    {
+        return;
+    }
+
+    switch (PortNum)
+    {
+    case PORTA_ID:
+
+        WRITE_BIT(GPIO_PORTA_DATA_R, PinNum, Data);
+        break;
+
+    case PORTB_ID:
+
+        WRITE_BIT(GPIO_PORTB_DATA_R, PinNum, Data);
+        break;
+
+    case PORTC_ID:
+
+        WRITE_BIT(GPIO_PORTC_DATA_R, PinNum, Data);
+        break;
+
+    case PORTD_ID:
+
+        WRITE_BIT(GPIO_PORTD_DATA_R, PinNum, Data);
+        break;
+
+    case PORTE_ID:
+
+        WRITE_BIT(GPIO_PORTE_DATA_R, PinNum, Data);
+        break;
+
+    case PORTF_ID:
+
+        WRITE_BIT(GPIO_PORTF_DATA_R, PinNum, Data);
+        break;
+    }
+}
+
+/*
+ * Description :
+ * Enables the internal resistance of the specified pin in the specified port.
+ * Internal pull up configuration are supported.
+ * Register(s) : GPIOPUR .
+ * If the input port number or pin number are not correct, The function will not handle the request.
+ */
+void GPIO_enablePullUp(uint8_t portNum, uint8_t pinNum, GPIO_PinInternalResistance res)
+{
+    if ((pinNum >= NUM_OF_PINS_PER_PORT) || (portNum >= NUM_OF_PORTS))
+    {
+        /* Do Nothing */
+        return;
+    }
+
+    if (res == PULL_UP)
+    {
+        switch (portNum)
+        {
+        case PORTA_ID:
+            SET_BIT(GPIO_PORTA_PUR_R, pinNum);
+            break;
+        case PORTB_ID:
+            SET_BIT(GPIO_PORTB_PUR_R, pinNum);
+            break;
+        case PORTC_ID:
+            SET_BIT(GPIO_PORTC_PUR_R, pinNum);
+            break;
+        case PORTD_ID:
+            SET_BIT(GPIO_PORTD_PUR_R, pinNum);
+            break;
+        case PORTE_ID:
+            SET_BIT(GPIO_PORTE_PUR_R, pinNum);
+            break;
+        case PORTF_ID:
+            SET_BIT(GPIO_PORTF_PUR_R, pinNum);
+            break;
+        }
+    }
+
+    else
+    {
+        return;
+    }
+}
+
+/*
+ * Description :
+ * Write the given value on the desired port.
+ * Register(s) : GPIODATA
+ * If the input port number is not correct, The function will not handle the request.
+ */
+void GPIO_writePort(uint8_t portNum, uint8_t value)
+{
+
+    if (portNum >= NUM_OF_PORTS)
+    {
+        /* Do Nothing */
+        return;
+    }
+
+    switch (portNum)
+    {
+    case PORTA_ID:
+        GPIO_PORTA_DATA_R = value;
+        break;
+
+    case PORTB_ID:
+        GPIO_PORTB_DATA_R = value;
+        break;
+
+    case PORTC_ID:
+        GPIO_PORTC_DATA_R = value;
+        break;
+
+    case PORTD_ID:
+        GPIO_PORTD_DATA_R = value;
+        break;
+
+    case PORTE_ID:
+        GPIO_PORTE_DATA_R = value;
+        break;
+
+    case PORTF_ID:
+        GPIO_PORTF_DATA_R = value;
+        break;
+    }
+}
+
+/*
+ * Description :
+ * Reads the current value of the desired port.
+ * Register(s) : GPIODATA
+ * If the input port number is not correct, The function will return an error value (0xFF).
+ */
+uint8_t GPIO_readPort(uint8_t portNum)
+{
+
+    if (portNum >= NUM_OF_PORTS)
+    {
+        /* Do Nothing */
+        return ERROR_VALUE;
+    }
+
+    switch (portNum)
+    {
+    case PORTA_ID:
+
+        return GPIO_PORTA_DATA_R;
+
+    case PORTB_ID:
+
+        return GPIO_PORTB_DATA_R;
+
+    case PORTC_ID:
+
+        return GPIO_PORTC_DATA_R;
+
+    case PORTD_ID:
+
+        return GPIO_PORTD_DATA_R;
+
+    case PORTE_ID:
+
+        return GPIO_PORTE_DATA_R;
+
+    case PORTF_ID:
+
+        return GPIO_PORTF_DATA_R;
+    }
+		return 0;
+}
