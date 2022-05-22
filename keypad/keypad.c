@@ -43,7 +43,36 @@ void KEYPAD_INIT(void)
     GPIO_PORTA_PDR_R |= 0xF0;
     GPIO_PORTA_DATA_R &= 0xF0;
     GPIO_PORTE_DATA_R &=0X0F;
-	
-	
+		
+}
+
+/*
+ * Description :
+ * Read the Keypad.
+ */
+
+uint8_t KEYPAD_READ(void)
+{
+
+    int i, j;
+    while (1)
+    {
+
+        for (i = 0; i < 4; i++) 
+        {
+            GPIO_writePort(PORTE_ID, (1 << (i)));
+            Generic_delay_micro(2);
+            for (j = 0; j < 4; j++) 
+            {
+                if ((GPIO_readPort(PORTA_ID) & 0xF0) & (1 << (j+4)))
+                {
+                    GPIO_PORTA_DATA_R &= (~0XF0);
+                    GPIO_PORTE_DATA_R &= (~0X0F);
+                    return array[j][i];
+                }
+            }
+        }
+    }
+    return 0xFF;
 }
 
