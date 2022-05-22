@@ -111,3 +111,141 @@ void LCD_Move_Curser(unsigned char row, unsigned char col)
     lcd_command(position);
     Generic_delay_m_sec(1);
 }
+
+/*
+ * Description :
+ * countdown time on LCD.
+ * Register(s) : CTRL_PORT,DATA_PORT.
+ */
+
+
+void LCD_COUNT_DOWN(float TotalTime, uint8_t key)
+{
+    uint8_t pause_flag = 0;
+    uint8_t SW2_flag = 0;
+    uint8_t state = key;
+    float Time_At_Pause = 0.0f;
+    int Minutes1 = 0, Minutes2 = 0;
+    int Seconds1 = 0, Seconds2 = 0;
+    float Seconds;
+    int Minutes = (int)TotalTime;
+    Seconds = TotalTime - Minutes;
+    
+
+    if ((key == 'A') || (key == 'B') || (key == 'C'))
+    {
+        Seconds = Seconds * 0.6;
+        Seconds2 = (int)(Seconds * 10);
+        Seconds1 = (int)(Seconds * 100 - Seconds2 * 10);
+        Minutes2 = 0;
+        Minutes1 = Minutes;
+    }
+    else if ((key = 'D'))
+    {
+        Seconds = Seconds * 0.6;
+        Seconds2 = (int)(Seconds * 10);
+        Seconds1 = (int)(Seconds * 100 - Seconds2 * 10);
+        Minutes2 = (int)(Minutes / 10);
+        Minutes1 = (int)(Minutes % 10);
+    }
+
+    while (1)
+    {
+        RBG_OUTPUT(PF123_mask);
+        lcd_command(clear_display);
+        send_char(Minutes2 + 48);
+        send_char(Minutes1 + 48);
+        send_char(':');
+        send_char(Seconds2 + 48);
+        send_char(Seconds1 + 48);
+        Generic_delay_sec(1);
+
+        if ((SW1_INPUT() == 0 && (pause_flag == 0)))
+        {
+            lcd_command(clear_display);
+            pause_flag = 1;
+            send_String("Cooking Paused");
+            Generic_delay_sec(2);
+            lcd_command(clear_display);
+            Minutes = Minutes1 + (Minutes2 * 10);
+            Seconds = Seconds1 + (Seconds2 * 10);
+            Time_At_Pause = Minutes + Seconds / 60.0;
+
+            while (!(SW1_INPUT() == 0))
+            {
+                LED_Blinking();
+                if (SW2_INPUT() == 0)
+                {
+                    lcd_command(clear_display);
+                    Generic_delay_sec(1);
+                    LCD_COUNT_DOWN(Time_At_Pause, state);
+                    SW2_flag++;
+                    break;
+                }
+            }
+            break;
+        }
+
+        if ((BUTTON_READ() == 0))
+        {
+            lcd_command(clear_display);
+            send_String("DOOR IS OPEN");
+            
+            
+            Minutes = Minutes1 + (Minutes2 * 10);
+            Seconds = Seconds1 + (Seconds2 * 10);
+            Time_At_Pause = Minutes + Seconds / 60.0;
+
+            while ((BUTTON_READ() == 0))
+            {
+                LED_Blinking();
+            }
+
+            lcd_command(clear_display);
+            Generic_delay_sec(1);
+            LCD_COUNT_DOWN(Time_At_Pause, state);
+            SW2_flag++;
+            break;
+        }
+
+        if (Seconds1 != 0)
+        {
+            Seconds1--;
+            continue;
+        }
+        else if (Seconds1 == 0 && Seconds2 != 0)
+        {
+            Seconds1 = 9;
+            Seconds2--;
+            continue;
+        }
+        else if (Seconds2 == 0 && Seconds1 == 0 && Minutes1 != 0)
+        {
+            Seconds2 = 5;
+            Seconds1 = 9;
+            Minutes1--;
+            continue;
+        }
+        else if (Seconds2 == 0 && Seconds1 == 0 && Minutes1 == 0 && Minutes2 != 0)
+        {
+            Seconds2 = 5;
+            Seconds1 = 9;
+            Minutes2--;
+            Minutes1 = 9;
+            continue;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    if (SW2_flag == 0)
+    {
+        lcd_command(clear_display);
+				LED_BUZZER();
+        send_String(" Cooking Done ");
+        
+        RBG_OUTPUT(0x00);
+    }
+}
