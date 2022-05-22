@@ -82,3 +82,5 @@ void send_String(unsigned char *data);
  * Register(s) : CTRL_PORT,DATA_PORT.
  */
 void LCD_Move_Curser(unsigned char row, unsigned char col);
+
+#endif
