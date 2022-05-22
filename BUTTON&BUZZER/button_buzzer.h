@@ -15,28 +15,42 @@
 
 #include "gpio.h"
 
-/**
+/********************************************************************
  *                              Functions Prototypes                           *
- **/
+ *******************************************************************/
 
-/ Description :
+/* Description :
 
     Initialization of Buzzer 
 
-/
+*/
 
 void Buzzer_init(void);
 
-/ Description :
+/* Description :
     Setting the buzzer ON 
-/
+*/
 
 void Buzzer_ON(void);
 
-/ Description :
+/* Description :
     Setting the buzzer OFF 
-/
+*/
 
 void Buzzer_OFF(void);
 
-/
+/*
+ Description :
+ initalization the Button Pin.
+ 
+*/
+void BUTTON_INIT(void);
+
+/*
+  Description :
+ Function that reads the Button.
+ 
+*/
+uint8_t BUTTON_READ(void);
+
+#endif // Button_BuzzerH
