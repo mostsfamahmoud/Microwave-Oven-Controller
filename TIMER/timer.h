@@ -44,5 +44,10 @@ void Generic_delay_sec(uint32_t sec);
  * delay for one minute
  */
 void Generic_delay_min(uint32_t mins);
+/*
+ * Description :
+ * delay for one micro.
+ */
+void Generic_delay_micro(uint32_t micro);
 
 #endif //TIMER_H_
