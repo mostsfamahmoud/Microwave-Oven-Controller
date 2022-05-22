@@ -57,30 +57,43 @@
  * Initialization of the LCD.
  * Register(s) : GPIO_DIR , GPIO_DATA
  */
+
 void LCD_INIT(void);
 /*
  * Description :
  * send commands to LCD.
  * Register(s) : GPIO_DATA.
  */
+
 void lcd_command(unsigned char cmd);
 /*
  * Description :
  * Sending Char.
  * Register(s) : CTRL_PORT,DATA_PORT.
  */
+
 void send_char(unsigned char data);
 /*
  * Description :
  * Sending String.
  * Register(s) : CTRL_PORT,DATA_PORT.
  */
+
 void send_String(unsigned char *data);
 /*
  * Description :
  * move cursor to write data on preffered row and column
  * Register(s) : CTRL_PORT,DATA_PORT.
  */
+
 void LCD_Move_Curser(unsigned char row, unsigned char col);
+
+/*
+ * Description :
+ * countdown time on LCD.
+ * Register(s) : CTRL_PORT,DATA_PORT.
+ */
+
+void LCD_COUNT_DOWN(float TotalTime, uint8_t key)
 
 #endif
