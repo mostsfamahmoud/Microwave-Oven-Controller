@@ -64,4 +64,16 @@ uint32_t i;
 		Generic_delay_sec(60);
 	}
 }
+/*
+ * Description :
+ * delay for one micro.
+ */
+void Generic_delay_micro(uint32_t micro)
+{
+	uint32_t i;
 
+	for (i = 0; i < micro; i++)
+	{
+		Systic_wait(16);
+	}
+}
