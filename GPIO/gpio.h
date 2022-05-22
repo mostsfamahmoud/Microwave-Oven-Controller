@@ -174,3 +174,44 @@ void GPIO_setPinDirection(uint8_t portNum, uint8_t pinNum, GPIO_PinDirectionType
  */
 
 uint8_t GPIO_readPin(uint8_t PortNum, uint8_t PinNum);
+
+/*
+ * Description :
+ * Write the value Logic High or Logic Low on the required pin.
+ * Register(s) : GPIODATA
+ * If the input port number or pin number are not correct, The function will not handle the request.
+ */
+
+void GPIO_writePin(uint8_t PortNum, uint8_t PinNum, uint8_t Data);
+
+/*
+ * Description :
+ * Enables the internal resistance of the specified pin in the specified port.
+ * Internal pull up configuration are supported.
+ * Register(s) : GPIOPUR .
+ * If the input port number or pin number are not correct, The function will not handle the request.
+ */
+void GPIO_enablePullUp(uint8_t portNum, uint8_t pinNum, GPIO_PinInternalResistance res);
+
+/*
+ * Description :
+ * Write the given value on the desired port.
+ * Register(s) : GPIODATA
+ * If the input port number is not correct, The function will not handle the request.
+ */
+void GPIO_writePort(uint8_t portNum, uint8_t value);
+
+/*
+ * Description :
+ * Reads the current value of the desired port.
+ * Register(s) : GPIODATA
+ * If the input port number is not correct, The function will return an error value (0xFF).
+ */
+uint8_t GPIO_readPort(uint8_t portNum);
+
+
+
+#endif /* GPIO_H_ */
+
+
+
