@@ -54,3 +54,31 @@ void Buzzer_OFF()
 {
     GPIO_writePin(PORTD_ID, PD6, LOGIC_LOW);
 }
+
+/*
+ * Description :
+ * initalization the Button Pin.
+ *
+ */
+void BUTTON_INIT(void)
+{
+    GPIO_configurePortClock(PORTD_ID);
+    REG_UNLOCK(GPIO_PORTD_LOCK_R);
+    GPIO_PORTD_AMSEL_R &= ~0x04; // disable analog function on PD2
+    GPIO_PORTD_CR_R |= 0x04;
+    GPIO_PORTD_PCTL_R &= ~0x00000F00;
+    GPIO_PORTD_AFSEL_R &= ~0x04; // disable alternate func
+    GPIO_PORTD_DIR_R &= ~0x04;
+    GPIO_PORTD_DEN_R |= 0x04;
+    GPIO_PORTD_PUR_R |= 0x04;
+}
+/*
+ * Description :
+ * Function that reads the Button.
+ *
+ */
+uint8_t BUTTON_READ()
+{
+    return GPIO_readPin(PORTD_ID, PD2);
+}
+
