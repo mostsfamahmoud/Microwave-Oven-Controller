@@ -136,6 +136,35 @@ uint8_t SW_INPUT(void){
 }
 
 
+/*
+ * Description :
+    Function that reads PORTF PINS(1,2,3).
+    Function makes leds toggel.
+ */
+
+void LED_Blinking(void)
+{
+    GPIO_PORTF_DATA_R ^= 0x0E;
+    Generic_delay_m_sec(500);
+}
+
+/*
+ * Description :
+    Function that reads PORTF PINS(1,2,3).
+    Function make leds toggel three times and turn buzzer on.
+ */
+
+void LED_BUZZER(void)
+{
+    int i;
+    Buzzer_ON();
+    for (i = 0; i < 6; i++)
+    {
+        GPIO_PORTF_DATA_R ^= 0x0E;
+        Generic_delay_m_sec(500);
+    }
+    Buzzer_OFF();
+}
 
 
 
