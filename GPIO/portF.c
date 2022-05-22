@@ -7,6 +7,7 @@
  * Description: LEDs & Built-in Switches Driver
  *
  * Authors: Mostafa Mahmoud Ali
+            Mai Esmail Gamal
  *
  *******************************************************************************/
 
@@ -26,25 +27,17 @@
  * If the input port number is not correct, The function will not handle the request.
  */
 
-void RBGLED_init(){
-
-    GPIO_ConfigurationType red = {PORTF_ID , PIN1_ID, DIGITAL,
-			NORMAL_MODE , GPIO_PORT_MODE, PIN_OUTPUT , NONE };
-
-    GPIO_ConfigurationType blue = {PORTF_ID , PIN2_ID, DIGITAL,
-			NORMAL_MODE , GPIO_PORT_MODE, PIN_OUTPUT , NONE };
-
-    GPIO_ConfigurationType green = {PORTF_ID , PIN3_ID, DIGITAL,
-			NORMAL_MODE , GPIO_PORT_MODE, PIN_OUTPUT , NONE };
-    
-    GPIO_ConfigurationType LEDs[] = { red , blue , green };
-
-
-    for (uint8_t i = 0 ; i < 3; i++){
-        GPIO_init(&LEDs[i]);
-    }
-
-    GPIO_writePort(PORTF_ID,PF123_mask);
+void RBGLED_init(void)
+{
+    GPIO_configurePortClock(PORTF_ID);
+    REG_UNLOCK(GPIO_PORTF_LOCK_R);
+    GPIO_PORTF_CR_R |= 0x0E; // allow change to pf123
+    GPIO_PORTF_PCTL_R &= ~0x0000FFF0;
+    GPIO_PORTF_AFSEL_R &= ~0x0E; // disable alternate func 00001110
+    GPIO_PORTF_AMSEL_R &= ~0x0E;
+    GPIO_PORTF_DIR_R |= 0x0E; // pf4=0 pf0=0
+    GPIO_PORTF_DEN_R |= 0x0E;
+    GPIO_PORTF_DATA_R &= ~0x0E;
 }
 
 
@@ -60,59 +53,49 @@ void RBG_OUTPUT(uint8_t Data){
 }
 
 
-
 /*
- * Description :
- *       function that initializes PortF Pins(0,4) as Digital Input that will be connected to a switch.
- * Note:
- *       1) Initializtion will depend on the value of SwitchNum that will be passed as a parameter.
- *       2) SO we can initalize one only or both of them at the same time.
- */
+ Description :
+       function that initializes PortF Pin(4) as Digital Input that will be connected to a switch.
+ Note:
+       1) Initializtion will depend on the value of SwitchNum that will be passed as a parameter.
+       2) SO we can initalize one only or both of them at the same time.
+*/
 
+void SW1_Init(void)
+{
 
-void SW_init(uint8_t SwitchNum){
-
-    GPIO_ConfigurationType SW1 = { PORTF_ID , PIN4_ID, DIGITAL,
-			NORMAL_MODE , GPIO_PORT_MODE, PIN_INPUT , PULL_UP };
-
-    GPIO_ConfigurationType SW2 = { PORTF_ID , PIN0_ID, DIGITAL,
-			NORMAL_MODE , GPIO_PORT_MODE, PIN_INPUT , PULL_UP };
-
-    GPIO_ConfigurationType SW[] = { SW1 , SW2 }; 
-
-
-    switch(SwitchNum){
-        
-        //enable SW1 only
-        case 1 :
-
-            GPIO_init(&SW1);
-            CLEAR_BIT(GPIO_PORTF_DATA_R,PIN4_ID);
-            break;
-
-        //enable SW2 only
-        case 2:
-
-            GPIO_init(&SW2);
-            CLEAR_BIT(GPIO_PORTF_DATA_R,PIN0_ID);
-            break;
-
-        // enable Both
-        case 12:
-
-            for (uint8_t i = 0; i < 2; i++){
-                GPIO_init(&SW[i]);
-            }
-
-            CLEAR_BIT(GPIO_PORTF_DATA_R,PF04_mask);
-            break;
-
-        default :
-            break;
-    
-    }
+    GPIO_configurePortClock(PORTF_ID);
+    REG_UNLOCK(GPIO_PORTF_LOCK_R);
+    GPIO_PORTF_AMSEL_R &= ~0x10; // disable analog function on PF4
+    GPIO_PORTF_CR_R |= 0x10;
+    GPIO_PORTF_PCTL_R &= ~0x000F0000;
+    GPIO_PORTF_AFSEL_R &= ~0x10; // disable alternate func
+    GPIO_PORTF_DIR_R &= ~0x10;   // pf4=0
+    GPIO_PORTF_DEN_R |= 0x10;
+    GPIO_PORTF_PUR_R |= 0x10;
 }
 
+/*
+Description :
+   function that initializes PortF Pin(0) as Digital Input that will be connected to a switch.
+Note:
+   1) Initializtion will depend on the value of SwitchNum that will be passed as a parameter.
+   2) SO we can initalize one only or both of them at the same time.
+*/
+
+void SW2_Init(void)
+{
+
+    GPIO_configurePortClock(PORTF_ID);
+    REG_UNLOCK(GPIO_PORTF_LOCK_R);
+    GPIO_PORTF_AMSEL_R &= ~0x01; // disable analog function on PF0
+    GPIO_PORTF_CR_R |= 0x01;
+    GPIO_PORTF_PCTL_R &= ~0x0000000F;
+    GPIO_PORTF_AFSEL_R &= ~0x01; // disable alternate func
+    GPIO_PORTF_DIR_R &= ~0x01;   // pf0=0
+    GPIO_PORTF_DEN_R |= 0x01;
+    GPIO_PORTF_PUR_R |= 0x01;
+}
 
 
 /*
