@@ -16,6 +16,8 @@
 
 #include "std_types.h"
 #include "altFunc.h"
+#include "tm4c123gh6pm.h"
+#include "Macros.h"
 
 /*******************************************************************************
  *                                Definitions                                  *
@@ -112,11 +114,6 @@
 /*******************************************************************************
  *                               Types Declaration                             *
  *******************************************************************************/
-typedef enum{
-
-	DIGITAL , ANALOG
-
-}GPIO_PinMode;
 
 typedef enum
 {
@@ -126,34 +123,9 @@ typedef enum
 
 typedef enum{
 
-	NONE , PULL_UP , PULL_DOWN
+	NONE , PULL_UP
 
 }GPIO_PinInternalResistance;
-
-typedef enum{
-
-	NORMAL_MODE , ALTERNATE_FUNCTION
-
-}GPIO_pinAFSEL;
-
-typedef struct{
-
-	uint8_t port_num;
-
-	uint8_t pin_num ;
-
-	GPIO_PinMode mode ;
-
-	GPIO_pinAFSEL Select ;
-
-	uint8_t AlternateFunctionNo ;
-
-	GPIO_PinDirectionType direction;
-
-	GPIO_PinInternalResistance resistance;
-
-
-}GPIO_ConfigurationType;
 
 
 /*******************************************************************************
@@ -162,93 +134,84 @@ typedef struct{
 
 /*
  * Description :
- * Setup the direction of the required pin input/output.
- * If the input port number or pin number are not correct, The function will not handle the request.
- */
-void GPIO_setPinDirection(uint8_t portNum , uint8_t pinNum , GPIO_PinDirectionType direction);
-
-/*
- * Description :
- * Setup the mode of the required pin analog/digital.
- * If the input port number or pin number are not correct, The function will not handle the request.
- */
-void GPIO_setPinMode(uint8_t portNum , uint8_t pinNum , GPIO_PinMode mode);
-
-/*
- * Description :
  * Configures the clock of a given port.
+ * Register(s) : SYSCTL_RCGCGPIO_R & SYSCTL_PRGPIO_R.
  * If the input port number is not correct, The function will not handle the request.
  */
 void GPIO_configurePortClock(uint8_t portNum);
 
 /*
  * Description :
- * If the required pin is one of the NMI pins (PC3-0 , PD7 , PF0) ,it is unlocked and the corresponding bit in the commit register is set.
- * Otherwise, it does nothing.
+ * Initialization the required Port as Digital I/O.
+ * Register(s) : RCGC2, GPIO_LOCK, GPIO_CR, GPIO_DEN, GPIO_AMSEL, GPIO_AFSEL, GPIO_PCTL.
  * If the input port number or pin number are not correct, The function will not handle the request.
  */
-void GPIO_unlockPin(uint8_t portNum , uint8_t pinNum);
 
+void GPIO_Init(uint8_t PortNum);
+
+/*
+ * Description :
+ * Setup the direction of the required Port.
+ * Register(s) : GPIO_DIR.
+ * If the input port number or pin number are not correct, The function will not handle the request.
+ */
+void GPIO_setPortDirection(uint8_t portNum, uint8_t direction);
+
+/*
+ * Description :
+ * Setup the direction of the required pin input/output.
+ * Register(s) : GPIO_DIR.
+ * If the input port number or pin number are not correct, The function will not handle the request.
+ */
+
+void GPIO_setPinDirection(uint8_t portNum, uint8_t pinNum, GPIO_PinDirectionType direction);
+
+/*
+ * Description :
+ * Write the value Logic High or Logic Low on the required pin.
+ * Register(s) : GPIODATA
+ * If the input port number or pin number are not correct, The function will return an error value (0xFF).
+ */
+
+uint8_t GPIO_readPin(uint8_t PortNum, uint8_t PinNum);
+
+/*
+ * Description :
+ * Write the value Logic High or Logic Low on the required pin.
+ * Register(s) : GPIODATA
+ * If the input port number or pin number are not correct, The function will not handle the request.
+ */
+
+void GPIO_writePin(uint8_t PortNum, uint8_t PinNum, uint8_t Data);
 
 /*
  * Description :
  * Enables the internal resistance of the specified pin in the specified port.
- * Internal pull up and Internal pull down configurations are supported.
+ * Internal pull up configuration are supported.
+ * Register(s) : GPIOPUR .
  * If the input port number or pin number are not correct, The function will not handle the request.
  */
-void GPIO_enableInternalResistance(uint8_t portNum , uint8_t pinNum , GPIO_PinInternalResistance res);
-/*
- * Description :
- * Sets the control of the specified pin in the specified port (Normal mode or Alternate Function).
- * If the input port number or pin number are not correct, The function will not handle the request.
- */
-void GPIO_setPinControl(uint8_t portNum , uint8_t pinNum , GPIO_pinAFSEL select );
-
-
-/*
- * Description :
- * it configures the alternate function of a certain pin in a certain port.
- * If the input port number or pin number are not correct, The function will not handle the request.
- */
-void GPIO_setAlternateFunction(uint8_t portNum , uint8_t pinNum , uint8_t altFunc);
-
-/*
- * Description :
- * Write the value Logic High or Logic Low on the required pin.
- * If the input port number or pin number are not correct, The function will not handle the request.
- */
-void GPIO_writePin(uint8_t portNum , uint8_t pinNum , uint8_t value);
-
-
-/*
- * Description :
- * Write the value Logic High or Logic Low on the required pin.
- * If the input port number or pin number are not correct, The function will return an error value (0xFF).
- */
-uint8_t GPIO_readPin(uint8_t portNum ,uint8_t pinNum);
+void GPIO_enablePullUp(uint8_t portNum, uint8_t pinNum, GPIO_PinInternalResistance res);
 
 /*
  * Description :
  * Write the given value on the desired port.
+ * Register(s) : GPIODATA
  * If the input port number is not correct, The function will not handle the request.
  */
-void GPIO_writePort(uint8_t portNum , uint8_t value);
+void GPIO_writePort(uint8_t portNum, uint8_t value);
 
 /*
  * Description :
  * Reads the current value of the desired port.
+ * Register(s) : GPIODATA
  * If the input port number is not correct, The function will return an error value (0xFF).
  */
 uint8_t GPIO_readPort(uint8_t portNum);
 
-/*
- * Description :
- * Configures a specified pin at the specified port with the given configuration structure.
- *  If the port number or pin number are not correct, The function will not handle the request.
- */
-void GPIO_init(GPIO_ConfigurationType *config_ptr);
 
 
 #endif /* GPIO_H_ */
+
 
 
