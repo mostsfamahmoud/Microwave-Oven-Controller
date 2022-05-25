@@ -74,6 +74,6 @@ void Generic_delay_micro(uint32_t micro)
 
 	for (i = 0; i < micro; i++)
 	{
-		Systic_wait(16);
+		systic_wait(16);
 	}
 }
