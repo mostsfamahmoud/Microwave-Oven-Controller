@@ -94,6 +94,6 @@ void LCD_Move_Curser(unsigned char row, unsigned char col);
  * Register(s) : CTRL_PORT,DATA_PORT.
  */
 
-void LCD_COUNT_DOWN(float TotalTime, uint8_t key)
+void LCD_COUNT_DOWN(float TotalTime, uint8_t key);
 
 #endif
