@@ -140,7 +140,7 @@ void LCD_COUNT_DOWN(float TotalTime, uint8_t key)
         Minutes2 = 0;
         Minutes1 = Minutes;
     }
-    else if ((key = 'D'))
+    else if ((key == 'D'))
     {
         Seconds = Seconds * 0.6;
         Seconds2 = (int)(Seconds * 10);
@@ -243,7 +243,7 @@ void LCD_COUNT_DOWN(float TotalTime, uint8_t key)
     if (SW2_flag == 0)
     {
         lcd_command(clear_display);
-				LED_BUZZER();
+	LED_BUZZER();
         send_String(" Cooking Done ");
         
         RBG_OUTPUT(0x00);
