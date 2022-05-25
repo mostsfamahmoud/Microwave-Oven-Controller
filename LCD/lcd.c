@@ -37,7 +37,7 @@ void LCD_INIT(void)
     lcd_command(cursorBlink); //  display is on and cursor blinking
     Generic_delay_m_sec(1);
     lcd_command(clear_display); // clear screen
-    Generic_delay_m_sec(2)
+    Generic_delay_m_sec(2);
     lcd_command(returnHome); // return home
     Generic_delay_m_sec(2);
 }
