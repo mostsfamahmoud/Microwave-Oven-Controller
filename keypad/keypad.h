@@ -21,13 +21,15 @@
  * Initialization the required port for the Keypad.
  * Register(s) : GPIO_PUR, GPIO_DIR.
  */
-void KEYPAD_INIT(uint8_t portnum);
+void KEYPAD_INIT(void);
+
 
 /*
  * Description :
  * Read the Keypad.
  * Register(s) : GPIO_DATA.
  */
-uint8_t KEYPAD_READ(uint8_t portnum);
+uint8_t KEYPAD_READ(void);
+
 
 #endif /* KEYPAD_H_ */
