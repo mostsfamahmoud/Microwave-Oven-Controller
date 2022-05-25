@@ -16,6 +16,150 @@
 
 /*
  * Description:
+ *   1) This Function implements State A in our projects.
+ *   2) it shows "Popcorn" on LCD and wait until pressing switch 2 (start the countdown for 1 minute)
+ *   3) checks the switch 3 state ( if door is open , the countdown will not start) 
+ *   4) also handles the switch 1 & 3 pausing conditions
+ */
+void state_A()
+{
+    send_String("Popcorn");
+    Generic_delay_sec(2);
+
+    while (1)
+    {
+        if (SW_INPUT() == Switch2)
+        {
+            while (BUTTON_READ() == 0)
+            {
+                lcd_command(clear_display);
+                send_String(" DOOR IS OPEN");
+                Generic_delay_m_sec(500);
+                lcd_command(clear_display);
+            }
+            LCD_COUNT_DOWN(1.0, 'A');
+        }
+    }
+}
+
+/*
+ * Description:
+ *   1) This Function implements State B in our projects.
+ *   2) it shows "Beef Weight" on LCD and wait to enter a number between 1 & 9 ( if not , will print "Err" ) and then wait until pressing switch 2 to start the countdown 
+ *   3) checks the switch 3 state ( if door is open , the countdown will not start) 
+ *   4) also handles the switch 1 & 3 pausing conditions
+ */
+
+void state_B()
+{
+    uint8_t kilos;
+    float timer;
+
+    send_String("Beef weight?");
+
+    do
+    {
+        kilos = KEYPAD_READ();
+        Generic_delay_m_sec(200);
+        if ((kilos <= '9') && (kilos >= '1'))
+        {
+            break;
+        }
+        else
+        {
+            lcd_command(clear_display);
+            send_String("Err");
+            Generic_delay_sec(2);
+            lcd_command(clear_display);
+            send_String("Beef weight?");
+            continue;
+        }
+
+    } while (!((kilos <= '9') && (kilos >= '1')));
+
+    lcd_command(clear_display);
+    send_char(kilos);
+    send_String(" Kilos");
+    Generic_delay_sec(2);
+    lcd_command(clear_display);
+    timer = ((kilos) - '0') * 0.5;
+    while (1)
+    {
+        if (SW_INPUT() == Switch2)
+        {
+            while (BUTTON_READ() == 0)
+            {
+                lcd_command(clear_display);
+                send_String(" DOOR IS OPEN");
+                Generic_delay_m_sec(500);
+                lcd_command(clear_display);
+            }
+            LCD_COUNT_DOWN(timer, 'B');
+        }
+    }
+}
+
+/*
+ * Description:
+ *   1) This Function implements State C in our projects.
+ *   2) it shows "Chicken Weight" on LCD and wait to enter a number between 1 & 9 ( if not , will print "Err" ) and then wait until pressing switch 2 to start the countdown 
+ *   3) checks the switch 3 state ( if door is open , the countdown will not start) 
+ *   4) also handles the switch 1 & 3 pausing conditions
+ */
+
+void state_C()
+{
+    uint8_t kilos;
+    float timer;
+
+    send_String("Chicken weight?");
+
+    do
+    {
+        kilos = KEYPAD_READ();
+        Generic_delay_m_sec(200);
+        if ((kilos <= '9') && (kilos >= '1'))
+        {
+            break;
+        }
+        else
+        {
+            lcd_command(clear_display);
+            send_String("Err");
+            Generic_delay_sec(2);
+            lcd_command(clear_display);
+            send_String("Chicken weight?");
+            continue;
+        }
+
+    } while (!((kilos <= '9') && (kilos >= '1')));
+
+    lcd_command(clear_display);
+    send_char(kilos);
+    send_String(" Kilos");
+    Generic_delay_sec(2);
+    lcd_command(clear_display);
+    timer = ((kilos) - '0') * 0.2;
+
+    while (1)
+    {
+        if (SW_INPUT() == Switch2)
+        {
+            while (BUTTON_READ() == 0)
+            {
+                lcd_command(clear_display);
+                send_String(" DOOR IS OPEN");
+                Generic_delay_m_sec(500);
+                lcd_command(clear_display);
+            }
+            LCD_COUNT_DOWN(timer, 'C');
+        }
+    }
+}
+
+
+/*
+ * Description:
  *   1) This Function implements State D in our projects.
  *   2) It supports taking numeric inputs from the keypad and do some processing on the taken data.
  *   3) It also supports displaying "ERR" for any unexpected event.
