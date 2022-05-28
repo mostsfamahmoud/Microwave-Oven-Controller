@@ -64,12 +64,12 @@ void lcd_command(unsigned char cmd)
 void send_char(unsigned char data) //-----> recive only one char
 {
     GPIO_writePort(DATA_PORT, data);
-    // GPIO_PORTB_DATA_R=data;
+
     GPIO_writePort(CTRL_PORT, 0x0C);
-    // GPIO_PORTE_DATA_R=0X05;
+   
     Generic_delay_m_sec(1);
     GPIO_writePort(CTRL_PORT, 0x04);
-    // GPIO_PORTE_DATA_R=0X01;
+    
     Generic_delay_m_sec(50);
 
     return;
