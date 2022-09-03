@@ -26,7 +26,9 @@ clear the LCD display and show the value of the weight on the LCD for 2 seconds,
 and then start cooking while the remaining cook time counts down (in seconds) on the LCD
 
    o Beef is defrosted at a rate of 0.5 minutes per kilo.
+   
    o Chicken is defrosted at a rate of 0.2 minutes per kilo.
+   
    o If an illegal number is entered, then the LCD should show “Err” for 2 seconds, then show previous message.
 
 • If D is pushed on the keypad, the words “Cooking Time?” should appear on the LCD. 
@@ -44,8 +46,11 @@ where the switch being down would be simulating the open-door situation and the 
 Only when the latch is closed should the oven be able to be started.
 
    o When SW2 is pressed, the oven starts operation.
+   
    o When SW1 (external push button) is pressed for first time, the oven operation pauses (keeping remaining time on the display).
+   
    o When SW1 is pushed for second time after pressing it for first time, the time is cleared and the cooking stops.
+   
    o If SW2 is pushed after the oven is paused and the door is closed, then cooking must resume from the time it was paused.
 
 • If it is cooking, opening the door should pause the cooking and keep the remaining time on display.
