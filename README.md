@@ -7,8 +7,11 @@ This project simulates the embedded controller in a microwave oven.
 ## Requirements:
 
 • LCD
+
 • Keypad
+
 • One External Push Buttons
+
 • TM4C123G Launch Pad
 
 ## Procedure Details:
@@ -54,6 +57,7 @@ Only when the latch is closed should the oven be able to be started.
    o If SW2 is pushed after the oven is paused and the door is closed, then cooking must resume from the time it was paused.
 
 • If it is cooking, opening the door should pause the cooking and keep the remaining time on display.
+
 • When the microwave is running, the array of LEDs should be on. When it is stopped, they should go off. 
 If paused, the array of LEDs should blink (wait time on and wait time off) till the cooking is resumed or stopped.
 
