@@ -28,7 +28,9 @@ If B (for Beef) or C (for chicken) is pushed on the keypad,
 > * Cooking starts while the remaining cook time counts down (in seconds) on the LCD 
 
    > **Beef** is defrosted at a rate of `0.5 minutes per kilo`.
+   
    > **Chicken** is defrosted at a rate of `0.2 minutes per kilo`.
+    
    > **If an illegal number is entered** , LCD shows `“Err” for 2 seconds`, then shows previous message.
    
 #### ***`Case D:`*** 
