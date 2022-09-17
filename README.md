@@ -1,41 +1,42 @@
 # Microwave Oven Controller Project
 
-## Aim:
+## `Aim:`
 This project simulates the embedded controller in a microwave oven.
-
-## Requirements:
-
+## `Requirements:`
 • LCD
-
 • Keypad
-
 • One External Push Buttons
-
 • TM4C123G Launch Pad
 
-## Procedure Details:
+## `Procedure Details:`
 
 ### While not cooking (stopped), enter a choice to begin cooking:
 
-• If A is pushed on the keypad (for popcorn), the LCD should show “Popcorn” and then cook for 1 minute while the remaining cook time counts down (in seconds) 
-on the LCD, then clear the LCD after cooking completes.
+#### ***`Case A:`***  
+If A is pushed on the keypad (for popcorn), 
+> * LCD shows `Popcorn`
+> * Cooking for **1 Minute** while the remaining cook time counts down (in seconds) on the LCD, 
+> * LCD is cleared after cooking completes.
 
-• If B (for Beef) or C (for chicken) is pushed on the keypad, the words “Beef weight?” or “Chicken weight?” (respectively) should appear on the LCD. 
-After that, the user must enter an integer value between 1 and 9 on the keypad to indicate how many kilos are there to be defrosted.
+#### ***`Case B & C:`***  
+If B (for Beef) or C (for chicken) is pushed on the keypad, 
+> * `Beef weight?` or `Chicken weight?` (respectively) appeares on the LCD. 
+> * Then the user must enter an integer value between 1 and 9 on the keypad to indicate how many kilos are there to be defrosted.
 
-Note that only whole kilo values are to be entered. After a valid number is entered, 
-clear the LCD display and show the value of the weight on the LCD for 2 seconds, 
-and then start cooking while the remaining cook time counts down (in seconds) on the LCD
+     NOTE:  Only whole kilo values are to be entered. 
+> * After a valid number is entered, LCD display is cleared and the value of the weight is displayed for 2 seconds.
+> * Cooking starts while the remaining cook time counts down (in seconds) on the LCD 
 
-   o Beef is defrosted at a rate of 0.5 minutes per kilo.
+
+   > **Beef** is defrosted at a rate of `0.5 minutes per kilo`.
+   > **Chicken** is defrosted at a rate of `0.2 minutes per kilo`.
+   > **If an illegal number is entered** , LCD shows `“Err” for 2 seconds`, then show previous message.
    
-   o Chicken is defrosted at a rate of 0.2 minutes per kilo.
-   
-   o If an illegal number is entered, then the LCD should show “Err” for 2 seconds, then show previous message.
-
-• If D is pushed on the keypad, the words “Cooking Time?” should appear on the LCD. 
-After that the user can enter a value between 1 and 30 to indicate the cooking time required in minutes and seconds. 
-This value is displayed on the LCD as it is entered, right to left. 
+#### ***`Case D:`*** 
+If D is pushed on the keypad.
+> * `Cooking Time?` appeares on the LCD. 
+>* After that the user can enter a value between 1 and 30 to indicate the cooking time required in minutes and seconds. 
+>* This value is displayed on the LCD as it is entered, right to left. 
 
 For example, pressing 1 displays 00:01, then pressing 2 displays 00:12, then pressing 4 displays 01:24, then pressing 5 displays 12:45. 
 Press push button SW1 to clear the LCD 
