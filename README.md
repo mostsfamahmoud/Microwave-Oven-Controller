@@ -55,9 +55,9 @@ If D is pushed on the keypad.
 2. Switch being up would be simulating the door closed situation. 
 
 > Only when the latch is closed should the oven be able to be started.
-       >> * When **SW1** is pressed for **first time**, `the oven operation pauses` (keeping remaining time on the display).
-       >> * When **SW1** is pushed for **second time** after pressing it for first time,  `time is cleared` and `the cooking stops`.
-       >> * When **SW2** is pushed after the _oven is paused_ and the _door is closed_, then `cooking resumes from the time it was paused`.
+>> * When **SW1** is pressed for **first time**, `the oven operation pauses` (keeping remaining time on the display).
+>> * When **SW1** is pushed for **second time** after pressing it for first time,  `time is cleared` and `the cooking stops`.
+>> * When **SW2** is pushed after the _oven is paused_ and the _door is closed_, then `cooking resumes from the time it was paused`.
 
 > While cooking, **Opening the door** pauses the cooking and keep the remaining time on display.
 
