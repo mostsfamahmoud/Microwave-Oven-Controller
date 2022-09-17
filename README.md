@@ -2,11 +2,15 @@
 
 ## `Aim:`
 This project simulates the embedded controller in a microwave oven.
-## `Requirements:`
+
+## `Hardware Used:`
 • LCD
+
 • Keypad
+
 • One External Push Buttons
-• TM4C123G Launch Pad
+
+• TM4C123G Launch Pad ( ***Tiva C*** )
 
 ## `Procedure Details:`
 
@@ -39,28 +43,28 @@ If D is pushed on the keypad.
 >* After that the user can enter a value between 1 and 30 to indicate the cooking time required in minutes and seconds. 
 >* This value is displayed on the LCD as it is entered, right to left. 
 
-For example, pressing 1 displays 00:01, then pressing 2 displays 00:12, then pressing 4 displays 01:24, then pressing 5 displays 12:45. 
-Press push button SW1 to clear the LCD 
-display and press SW2 to start cooking and counting down (in seconds) the cooking time on the LCD.
+***For example :*** 
+>Pressing 1 displays `00:01` , Then pressing 2 displays `00:12` , Then pressing 4 displays `01:24` , Then pressing 5 displays `12:45`. 
+> * Press _`button1 (SW1)`_ to clear the LCD display.
+> * Press _`button2 (SW2)`_ to start cooking and counting down (in seconds) the cooking time on the LCD.
 
 ### Start/Stop/Pause cooking conditions:
 
-• Switch SW3 (external push button), position 1, will simulate the microwave oven door latch, 
-where the switch being down would be simulating the open-door situation and the switch being up would be simulating the door closed situation. 
-Only when the latch is closed should the oven be able to be started.
+***Switch SW3*** (external push button) simulates the `microwave oven door` latch where:
+1. Switch being down would be simulating the open-door situation 
+2. Switch being up would be simulating the door closed situation. 
 
-   o When SW2 is pressed, the oven starts operation.
-   
-   o When SW1 (external push button) is pressed for first time, the oven operation pauses (keeping remaining time on the display).
-   
-   o When SW1 is pushed for second time after pressing it for first time, the time is cleared and the cooking stops.
-   
-   o If SW2 is pushed after the oven is paused and the door is closed, then cooking must resume from the time it was paused.
+> Only when the latch is closed should the oven be able to be started.
+       >> * When **SW1** is pressed for **first time**, `the oven operation pauses` (keeping remaining time on the display).
+       >> * When **SW1** is pushed for **second time** after pressing it for first time,  `time is cleared` and `the cooking stops`.
+       >> * When **SW2** is pushed after the _oven is paused_ and the _door is closed_, then `cooking resumes from the time it was paused`.
 
-• If it is cooking, opening the door should pause the cooking and keep the remaining time on display.
+> While cooking, **Opening the door** pauses the cooking and keep the remaining time on display.
 
-• When the microwave is running, the array of LEDs should be on. When it is stopped, they should go off. 
-If paused, the array of LEDs should blink (wait time on and wait time off) till the cooking is resumed or stopped.
+> When the microwave is running, ***The array of LEDs is ON***. When it is stopped, they go off.
 
-When the microwave completes its function and timer has counted down to zero (regular timed cooking or defrosting), 
-the array of LEDs should flash 3 times (wait time on and wait time off), and the buzzer should produce an audible tone/alarm during these 3 second times periods.
+>If paused, ***The array of LEDs blinks*** (wait time on and wait time off) till the cooking is resumed or stopped.
+
+> When the microwave completes its function and timer has counted down to zero (regular timed cooking or defrosting), 
+>> * The array of LEDs should flash 3 times (wait time on and wait time off), 
+>> * The buzzer should produce an audible tone/alarm during these 3 second times periods.
