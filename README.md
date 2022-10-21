@@ -1,9 +1,9 @@
 # Microwave Oven Controller Project
 
-## `Aim:`
+## Aim:
 This project simulates the embedded controller in a microwave oven.
 
-## `Hardware Used:`
+## Hardware Used:
 • LCD
 
 • Keypad
@@ -12,36 +12,38 @@ This project simulates the embedded controller in a microwave oven.
 
 • TM4C123G Launch Pad ( ***Tiva C*** )
 
-## `Procedure Details:`
+## Procedure Details:
 
 ### While not cooking (stopped), enter a choice to begin cooking:
 
-#### ***`Case A:`***  
+#### ***Case A:***  
 If A is pushed on the keypad (for popcorn), 
-> * LCD shows `Popcorn`
-> * Cooking for **1 Minute** while the remaining cook time counts down (in seconds) on the LCD, 
-> * LCD is cleared after cooking completes.
+* LCD shows `Popcorn`
+* Cooking for **1 Minute** while the remaining cook time counts down (in seconds) on the LCD, 
+* LCD is cleared after cooking completes.
 
-#### ***`Case B & C:`***  
+#### ***Case B & C:***  
 If B (for Beef) or C (for chicken) is pushed on the keypad, 
-> * `Beef weight?` or `Chicken weight?` (respectively) appeares on the LCD. 
-> * Then the user must enter an integer value between 1 and 9 on the keypad to indicate how many kilos are there to be defrosted.
+* `Beef weight?` or `Chicken weight?` (respectively) appeares on the LCD. 
+* Then the user must enter an integer value between 1 and 9 on the keypad to indicate how many kilos are there to be defrosted.
 
-     NOTE:  Only whole kilo values are to be entered. 
-> * After a valid number is entered, LCD display is cleared and the value of the weight is displayed for 2 seconds.
-> * Cooking starts while the remaining cook time counts down (in seconds) on the LCD 
->> * **Beef** is defrosted at a rate of `0.5 minutes per kilo`.
->> * **Chicken** is defrosted at a rate of `0.2 minutes per kilo`.
->> * **If an illegal number is entered** , LCD shows `“Err” for 2 seconds`, then shows previous message.
+             NOTE:  Only whole kilo values are to be entered. 
+* After a valid number is entered, LCD display is cleared and the value of the weight is displayed for 2 seconds.
+* Cooking starts while the remaining cook time counts down (in seconds) on the LCD 
+
+            Beef is defrosted at a rate of 0.5 minutes per kilo. 
+            Chicken is defrosted at a rate of 0.2 minutes per kilo.
+
+* If an illegal number is entered** , LCD shows `“Err” for 2 seconds`, then shows previous message.
    
-#### ***`Case D:`*** 
+#### ***Case D:*** 
 If D is pushed on the keypad.
-> * `Cooking Time?` appeares on the LCD. 
->* After that the user can enter a value between 1 and 30 to indicate the cooking time required in minutes and seconds. 
->* This value is displayed on the LCD as it is entered, right to left. 
+* `Cooking Time?` appeares on the LCD. 
+* After that the user can enter a value between 1 and 30 to indicate the cooking time required in minutes and seconds. 
+* This value is displayed on the LCD as it is entered, right to left. 
 
 ***For example :*** 
->Pressing 1 displays `00:01` , Then pressing 2 displays `00:12` , Then pressing 4 displays `01:24` , Then pressing 5 displays `12:45`. 
+> Pressing 1 displays `00:01` , Then pressing 2 displays `00:12` , Then pressing 4 displays `01:24` , Then pressing 5 displays `12:45`. 
 > * Press _`button1 (SW1)`_ to clear the LCD display.
 > * Press _`button2 (SW2)`_ to start cooking and counting down (in seconds) the cooking time on the LCD.
 
@@ -65,3 +67,7 @@ If D is pushed on the keypad.
 > When the microwave completes its function and timer has counted down to zero (regular timed cooking or defrosting), 
 >> * The array of LEDs should flash 3 times (wait time on and wait time off), 
 >> * The buzzer should produce an audible tone/alarm during these 3 second times periods.
+
+## Demo Video
+
+- [Microwave-Oven-Controller-Video](https://drive.google.com/file/d/17BxZoLQhLMUKawqZXO_KqVUAUKjnEkxj/view?usp=sharing)
